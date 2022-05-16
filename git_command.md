@@ -162,6 +162,9 @@ Working Directory、index、HEAD，详情[戳这里](https://git-scm.com/book/zh
 <a id="047"></a>
 #### [状态暂存并切换分支](#47)
 
+<a id="048"></a>
+#### [终端无法正常显示中文字符](#48)
+
 &nbsp;
 
 &nbsp;
@@ -492,12 +495,23 @@ url是远程仓库地址.
 <a id="16"></a>
 
 ## 删除远程分支
+假设你位于 dev 分支，要删除的是远程 dev33分支。  
 
-`git branch -d -r <remote-branch-name>`  
-> 删除本地关于远程分支的信息记录  
-
+方法一：  
 `git push origin : <remote-branch-name>`
-> 执行后，远程分支就会被删除
+> 即 `git push origin  :dev33`；  
+> 这一步还会删除 origin/dev33 分支；
+
+方法二：
+`git push origin -d <remote-branch-name>`
+> 即 `git push origin -d dev33`；  
+> 这一步同样后删除 origin/dev33 分支；
+
+***注意***  
+`git branch -d -r origin/dev33`
+> 只会删除 origin/dev33 分支，不会影响到远程分支；  
+> 如果省略 `-r` ，只能删除本地分支，无法删除 origin/dev33分支。
+
 
 &nbsp;
 
@@ -872,8 +886,8 @@ message 是本次提交的一些说明，方便以后查看提交记录排查问
 `git push origin main:develop`
 
 > * 把某个分支推送到另一个分支，本地分支名当然在前，远程分支名当然在后啦
-> * 如果省略`:develop`，会将dev分支推送到它所关联的远程分支，
-> 没有关联的远程分支的话，就会在远程仓库创建一个新的同名分支，并推给这个分支
+> * 如果省略`:develop`，会将main分支推送到它所关联的远程分支，
+> 没有关联的远程分支的话，就会在远程仓库创建一个新的同名分支，并推给这个分支。本地会生成 `origin/main`虚拟分支。
 > * 如果省略`main`,相当于删除远程分支develop
 > * 如果本地分支已经关联到远程分支develop且二者同名，  
 > 可简写为`git push origin`
@@ -1127,6 +1141,17 @@ message 是本次提交的一些说明，方便以后查看提交记录排查问
 &nbsp;
 
 &nbsp;
+
+[返回目录](#0)
+[返回条目](#047)
+
+
+<a id="48"></a>
+
+## 终端无法正常显示中文字符
+当你执行 `git status` 后，如果发现终端无法显示正常的中文字符，你可以
+这样解决：  
+执行 `git config --global core.quotepath false`  
 
 [返回目录](#0)
 [返回条目](#047)
