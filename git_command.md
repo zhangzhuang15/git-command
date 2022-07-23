@@ -396,6 +396,8 @@ url是远程仓库地址.
   
 将从当前分支拉出一个新分支，名字为`<branch-name>`  
 
+> 你也可以基于tag创建分支：`git branch <branch-name> <tag-name>`
+
 &nbsp;
 
 &nbsp;
@@ -917,6 +919,10 @@ message 是本次提交的一些说明，方便以后查看提交记录排查问
 > * 如果省略`:main`，会将远程分支develop拉取到当前本地分支
 > * 如果当前本地分支已经关联远程分支develop且二者同名，可简写为  
 > `git pull origin`
+
+> 如果想让两个本地分支合并，可以使用git merge 命令：
+> 1. `git merge jack` 将jack分支合并到当前分支
+> 2. `git cherry-pick <commit-id>` 将某次提交所做的改动合并到当前分支上，也可以是多次提交，提交ID号用空格隔开即可。
 
 &nbsp;
 
