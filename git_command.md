@@ -451,7 +451,11 @@ url是远程仓库地址.
 * 执行
     `git checkout --track origin/dev_remote_1`
     > 在本地创建一个dev_remote_1分支，并切换到该分支，且
-    > 该分支和远程的dev_remote_1分支关联  
+    > 该分支和远程的dev_remote_1分支关联
+
+等效于
+`git branch -t dev_remote_1 origin/dev_remote_1` 
+`git checkout dev_remote_1` 
 
 * 执行
     `git checkout dev_remote_1`
@@ -502,17 +506,25 @@ url是远程仓库地址.
 方法一：  
 `git push origin : <remote-branch-name>`
 > 即 `git push origin  :dev33`；  
-> 这一步还会删除 origin/dev33 分支；
+> 会删除remotes/origin/dev33 分支记录，还会删除远程仓库origin的dev33分支；
 
 方法二：
-`git push origin -d <remote-branch-name>`
-> 即 `git push origin -d dev33`；  
-> 这一步同样后删除 origin/dev33 分支；
+`git push -d origin <remote-branch-name>`
+> 即 `git push -d origin dev33`；  
 
 ***注意***  
 `git branch -d -r origin/dev33`
-> 只会删除 origin/dev33 分支，不会影响到远程分支；  
-> 如果省略 `-r` ，只能删除本地分支，无法删除 origin/dev33分支。
+> 只会删除remotes/origin/dev33 分支记录，不会影响到远程分支； 
+> 本地分支也可以命名origin/dev33，所以用 -r 表示后边的分支指代远程仓库分支记录, 是remotes/origin/dev33分支记录； 
+> 如果省略 `-r` ，只会删除本地名为origin/dev33的分支。
+
+如果在bash中：
+```bash
+$ git branch -a 
+* master
+  remotes/origin/master
+```
+remotes/origin/master 是远程仓库origin的master分支，在本地仓库的一个记录；
 
 
 &nbsp;
@@ -969,7 +981,7 @@ message 是本次提交的一些说明，方便以后查看提交记录排查问
 
 
 * 推送到远程仓库  
-`git push origin <tagname>`
+`git push origin <tagname>` 或者 `git push --tags origin`
 
 在github上的tags列表就能看到你新创建的标签  
 
