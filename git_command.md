@@ -165,6 +165,9 @@ Working Directory、index、HEAD，详情[戳这里](https://git-scm.com/book/zh
 <a id="048"></a>
 #### [终端无法正常显示中文字符](#48)
 
+<a id="049"></a>
+#### [大文件拒绝push](#49)
+
 &nbsp;
 
 &nbsp;
@@ -1174,5 +1177,33 @@ message 是本次提交的一些说明，方便以后查看提交记录排查问
 这样解决：  
 执行 `git config --global core.quotepath false`  
 
+&nbsp;
+
+&nbsp;
+
 [返回目录](#0)
-[返回条目](#047)
+[返回条目](#048)
+
+
+<a id="49"></a>
+
+## 大文件拒绝push
+当你要提交的文件中，出现单文件超过100MB的文件时，会被github远程拒绝，而你尝试删除该文件后，发现依旧会被拒绝，这是因为在过去的commit记录中，保留该文件的信息。
+
+为了解决这个问题，你需要：
+```sh 
+brew install git-filter-repo
+
+# PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA要替换成大文件的路径，注意是路径，不能只包含文件名哦
+# 如果运行不成功，需要增加 --force
+git filter-repo --invert-paths --path PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA
+
+# 运行成功后，远程仓库的地址可能会被删除，重新加入一下即可
+```
+
+&nbsp;
+
+&nbsp;
+
+[返回目录](#0)
+[返回条目](#049)
