@@ -17,6 +17,30 @@ Working Directory、index、HEAD，详情[戳这里](https://git-scm.com/book/zh
 &nbsp;
 
 
+## .git文件夹
+
+`.git/refs/heads` 放置本地分支信息
+
+`.git/refs/remotes/origin` 放置远程仓库origin的分支信息
+
+`.git/refs/tags` 放置tags信息
+
+`.git/logs/refs/heads` 放置本地各个分支commit日志信息
+
+`.git/logs/refs/remotes/origin` 放置远程仓库origin的各个分支commit日志信息
+
+`.git/HEAD` 记录本地当前分支
+
+`.git/objects` 存储对象信息，包括数据对象、树对象、提交对象、标签对象等等。git采用无损压缩算法，将原文件内容压缩和还原，这也就是为什么切换分支后，对应的文件内容也会更新。git会将这些压缩的内容用SHA-1得到摘要，这就是object hash，摘要的前两个字符作为目录，剩下的字符作为文件名，压缩后的内容就放在这些文件里。
+> 查看object内容的方法 `git cat-file -p <object-hash>`
+
+`.git/index` 这个文件就是暂存区
+> 查看该文件的方法 `git ls-files`
+
+&nbsp;
+
+&nbsp;
+
 <a id="0"></a>
 
 ## 目录
